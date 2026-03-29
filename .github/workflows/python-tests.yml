@@ -30,5 +30,16 @@ jobs:
             pip install fastapi uvicorn httpx pytest "pydantic<3"
           fi
 
+      - name: Show workspace
+        shell: bash
+        run: |
+          pwd
+          ls -la
+          find . -maxdepth 2 -type f | sort
+
+      - name: Run pytest
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: python -m pytest -q tests
       - name: Run pytest
         run: pytest -q
